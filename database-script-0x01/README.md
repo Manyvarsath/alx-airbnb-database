@@ -1,8 +1,6 @@
 
 # Explanation of the Database Schema SQL
 
-This document provides a detailed breakdown of the SQL script used to create the database schema. The script is designed for PostgreSQL and defines the structure for a property booking application.
-
 ---
 
 ## 1. Custom Type Definitions (ENUMs)
