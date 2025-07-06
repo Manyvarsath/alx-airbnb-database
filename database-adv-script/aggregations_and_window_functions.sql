@@ -30,6 +30,6 @@ WITH PropertyBookings AS (
 SELECT
     name,
     booking_count,
-    RANK() OVER (ORDER BY booking_count DESC) AS property_rank
+    ROW_NUMBER() OVER (ORDER BY booking_count DESC) AS property_row_number
 FROM
     PropertyBookings;
