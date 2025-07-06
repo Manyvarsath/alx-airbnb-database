@@ -1,3 +1,5 @@
+-- Query 1: INNER JOIN
+
 SELECT
     b.booking_id,
     b.start_date,
@@ -13,6 +15,8 @@ FROM
 INNER JOIN
     User AS u ON b.user_id = u.user_id;
 
+-- Query 2: LEFT JOIN
+
 SELECT
     p.property_id,
     p.name,
@@ -27,6 +31,8 @@ LEFT JOIN
     Review AS r ON p.property_id = r.property_id
 ORDER BY
 	p.property_id;
+
+-- Query 3: FULL OUTER JOIN
 
 SELECT
     u.user_id,

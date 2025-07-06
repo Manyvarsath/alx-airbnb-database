@@ -1,3 +1,5 @@
+-- Query 1: Subquery
+
 SELECT
     p.property_id,
     p.name,
@@ -16,6 +18,8 @@ WHERE
         HAVING
             AVG(r.rating) > 4.0
     );
+
+-- Query 2: Correlated Subquery
 
 SELECT
     u.user_id,

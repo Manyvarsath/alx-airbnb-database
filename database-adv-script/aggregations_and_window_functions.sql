@@ -1,3 +1,5 @@
+-- Query 1: GROUP BY
+
 SELECT
     u.user_id,
     u.first_name,
@@ -13,6 +15,8 @@ GROUP BY
     u.last_name
 ORDER BY
     total_bookings DESC;
+
+-- Query 2: Window Functions
 
 WITH PropertyBookings AS (
     SELECT
