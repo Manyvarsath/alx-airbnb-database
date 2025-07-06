@@ -1,5 +1,5 @@
 -- Initial Query
-
+EXPLAIN ANALYZE
 SELECT
     b.booking_id,
     b.start_date,
@@ -21,7 +21,9 @@ JOIN
 JOIN
     PROPERTY p ON b.property_id = p.property_id
 LEFT JOIN
-    PAYMENT py ON b.booking_id = py.booking_id;
+    PAYMENT py ON b.booking_id = py.booking_id
+WHERE
+    p.location = 'New York' AND b.status = 'confirmed';
 
 -- Index Creation
 
@@ -35,7 +37,7 @@ CREATE INDEX idx_message_sender_id ON MESSAGE(sender_id);
 CREATE INDEX idx_message_recipient_id ON MESSAGE(recipient_id);
 
 -- Refactored Query
-
+EXPLAIN ANALYZE
 SELECT
     b.booking_id,
     b.start_date,
@@ -49,6 +51,7 @@ FROM
 WHERE
     b.status = 'confirmed';
 
+EXPLAIN ANALYZE
 SELECT
     py.amount,
     py.payment_date,
@@ -56,5 +59,5 @@ SELECT
 FROM
     PAYMENT py
 WHERE
-    py.booking_id = 'some-booking-id';
+    py.amount >= 500;
 
