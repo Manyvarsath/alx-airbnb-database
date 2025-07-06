@@ -46,21 +46,26 @@
 
 ## File 3: aggregations_and_window_functions.sql
 
--- This file contains SQL queries using grouping and window functions for the AirBnB database schema.
+This file contains SQL queries using grouping and window functions for the AirBnB database schema.
 
--- =================================================================
--- Query 1: GROUP BY
--- Find the total number of bookings made by each user.
--- This uses the COUNT function with a GROUP BY clause to aggregate
--- bookings for each user.
--- =================================================================
+* Query 1: GROUP BY
+Find the total number of bookings made by each user.
+This uses the COUNT function with a GROUP BY clause to aggregate
+bookings for each user.
 
--- =================================================================
--- Query 2: Window Function (RANK)
--- Rank properties based on the total number of bookings they have received.
--- This uses the RANK() window function to assign a rank to each property
--- based on its booking count. Properties with the same number of bookings
--- will receive the same rank.
--- =================================================================
+* Query 2: Window Function (RANK)
+Rank properties based on the total number of bookings they have received.
+This uses the RANK() window function to assign a rank to each property
+based on its booking count. Properties with the same number of bookings
+will receive the same rank.
 
-## File 4: 
+## File 4: index_performance.md
+
+This file contains information about index performance measurements for optimizing queries.
+
+## File 5:  database_index.sql
+
+This file contains relevant queries and commands mentionned in "File 4"
+
+## File 6:
+
