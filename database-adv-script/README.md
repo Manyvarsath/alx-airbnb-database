@@ -26,4 +26,22 @@
 -- For MySQL, this can be simulated using a UNION of a LEFT JOIN and a RIGHT JOIN.
 -- =================================================================
 
-## File 2: 
+## File 2: subqueries.sql
+
+-- This file contains SQL queries using subqueries for the AirBnB database schema.
+
+-- =================================================================
+-- Query 1: Subquery
+-- Find all properties where the average rating is greater than 4.0.
+-- This uses a subquery to first find the property_ids that meet the
+-- average rating criteria from the Review table.
+-- =================================================================
+
+-- =================================================================
+-- Query 2: Correlated Subquery
+-- Find all users who have made more than 3 bookings.
+-- This uses a correlated subquery that executes once for each row
+-- processed by the outer query to count the number of bookings for that user.
+-- =================================================================
+
+## File 3: 
