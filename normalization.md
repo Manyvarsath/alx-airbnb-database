@@ -1,45 +1,89 @@
+
 # Normalization Analysis
-The process of normalization aims to reduce data redundancy and improve data integrity by organizing a database into tables and columns. The key normal forms are First Normal Form (1NF), Second Normal Form (2NF), and Third Normal Form (3NF).
+
+The process of normalization aims to reduce data redundancy and improve data integrity by organizing a database into tables and columns. The key normal forms are:
+
+- **First Normal Form (1NF)**
+- **Second Normal Form (2NF)**
+- **Third Normal Form (3NF)**
+
+---
 
 ## First Normal Form (1NF)
-A table is in 1NF if all its attributes are atomic, meaning each cell contains a single, indivisible value, and each entry has a unique primary key.
 
-USER: All attributes (user_id, first_name, last_name, email, password_hash, phone_number, role, created_at) are atomic. The primary key is user_id.
+A table is in **1NF** if all its attributes are **atomic**, meaning each cell contains a single, indivisible value, and each entry has a unique primary key.
 
-PROPERTY: All attributes (property_id, host_id, name, description, location, price_per_night, created_at, updated_at) are atomic. The primary key is property_id.
+### Tables in 1NF
 
-BOOKING: All attributes (booking_id, property_id, user_id, start_date, end_date, total_price, status, created_at) are atomic. The primary key is booking_id.
+- **USER**:  
+  All attributes (`user_id`, `first_name`, `last_name`, `email`, `password_hash`, `phone_number`, `role`, `created_at`) are atomic.  
+  **Primary key**: `user_id`
 
-PAYMENT: All attributes (payment_id, booking_id, amount, payment_date, payment_method) are atomic. The primary key is payment_id.
+- **PROPERTY**:  
+  All attributes (`property_id`, `host_id`, `name`, `description`, `location`, `price_per_night`, `created_at`, `updated_at`) are atomic.  
+  **Primary key**: `property_id`
 
-REVIEW: All attributes (review_id, property_id, user_id, rating, comment, created_at) are atomic. The primary key is review_id.
+- **BOOKING**:  
+  All attributes (`booking_id`, `property_id`, `user_id`, `start_date`, `end_date`, `total_price`, `status`, `created_at`) are atomic.  
+  **Primary key**: `booking_id`
 
-MESSAGE: All attributes (message_id, sender_id, recipient_id, message_body, sent_at) are atomic. The primary key is message_id.
+- **PAYMENT**:  
+  All attributes (`payment_id`, `booking_id`, `amount`, `payment_date`, `payment_method`) are atomic.  
+  **Primary key**: `payment_id`
 
-Conclusion: All tables in the schema satisfy the requirements of 1NF.
+- **REVIEW**:  
+  All attributes (`review_id`, `property_id`, `user_id`, `rating`, `comment`, `created_at`) are atomic.  
+  **Primary key**: `review_id`
+
+- **MESSAGE**:  
+  All attributes (`message_id`, `sender_id`, `recipient_id`, `message_body`, `sent_at`) are atomic.  
+  **Primary key**: `message_id`
+
+✅ **Conclusion**: All tables in the schema satisfy the requirements of 1NF.
+
+---
 
 ## Second Normal Form (2NF)
-A table is in 2NF if it is in 1NF and every non-primary-key attribute is fully functionally dependent on the entire primary key. This rule applies to tables with composite primary keys.
 
-In this schema, every table has a single-column primary key (e.g., user_id, property_id, booking_id, etc.). Therefore, there are no partial dependencies possible.
+A table is in **2NF** if it is in 1NF and every non-primary-key attribute is **fully functionally dependent** on the entire primary key. This rule applies mainly to tables with **composite primary keys**.
 
-Conclusion: All tables in the schema inherently satisfy 2NF.
+In this schema, **every table has a single-column primary key** (e.g., `user_id`, `property_id`, `booking_id`, etc.). Therefore, **no partial dependencies** exist.
+
+✅ **Conclusion**: All tables in the schema inherently satisfy 2NF.
+
+---
 
 ## Third Normal Form (3NF)
-A table is in 3NF if it is in 2NF and there are no transitive dependencies. A transitive dependency exists when a non-key attribute depends on another non-key attribute, which in turn depends on the primary key.
 
-USER: Attributes like first_name, last_name, and email are directly dependent on user_id. No non-key attribute is dependent on another non-key attribute.
+A table is in **3NF** if it is in 2NF and there are **no transitive dependencies**.  
+A transitive dependency exists when a non-key attribute depends on another non-key attribute, which in turn depends on the primary key.
 
-PROPERTY: name, description, and location are all directly dependent on property_id. The host_id is a foreign key and depends directly on property_id.
+### Analysis by Table
 
-BOOKING: start_date, end_date, and total_price are all directly dependent on the booking_id. The property_id and user_id are foreign keys.
+- **USER**:  
+  Attributes like `first_name`, `last_name`, and `email` depend directly on `user_id`.  
+  No transitive dependencies.
 
-One might consider if total_price is transitively dependent. For example, total_price could be calculated from price_per_night (in the PROPERTY table) and the duration of the stay (end_date - start_date). However, total_price is stored here to capture the price at the time of booking, which might differ from a later calculation if the property's price changes. This makes total_price directly dependent on the booking_id.
+- **PROPERTY**:  
+  `name`, `description`, and `location` depend directly on `property_id`.  
+  `host_id` is a foreign key and is also directly related to `property_id`.
 
-PAYMENT: amount, payment_date, and payment_method are all directly dependent on the payment_id. The booking_id is a foreign key.
+- **BOOKING**:  
+  `start_date`, `end_date`, and `total_price` depend on `booking_id`.  
+  `property_id` and `user_id` are foreign keys.  
+  ⚠️ **Note**: While `total_price` could theoretically be calculated from `price_per_night` and the duration (`end_date - start_date`), it is stored to capture the value at time of booking—thus it is still directly dependent on `booking_id`.
 
-REVIEW: rating and comment are directly dependent on the review_id. property_id and user_id are foreign keys.
+- **PAYMENT**:  
+  `amount`, `payment_date`, and `payment_method` depend on `payment_id`.  
+  `booking_id` is a foreign key.
 
-MESSAGE: message_body and sent_at are directly dependent on the message_id. sender_id and recipient_id are foreign keys.
+- **REVIEW**:  
+  `rating` and `comment` depend on `review_id`.  
+  `property_id` and `user_id` are foreign keys.
 
-Conclusion: No transitive dependencies exist in any of the tables. Therefore, the entire schema is in 3NF.
+- **MESSAGE**:  
+  `message_body` and `sent_at` depend on `message_id`.  
+  `sender_id` and `recipient_id` are foreign keys.
+
+✅ **Conclusion**: No transitive dependencies exist in any of the tables. Therefore, the entire schema is in **3NF**.
+
