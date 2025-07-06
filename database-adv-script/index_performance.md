@@ -1,3 +1,4 @@
+
 # Index Performance Analysis
 
 Based on the common query patterns for our system, and the indexes created in the SQL file, we have identified three high-usage columns:
@@ -10,6 +11,7 @@ Based on the common query patterns for our system, and the indexes created in th
 * **`Property` Table**:
     * `property_id`: The primary key used in `JOIN` clauses to link properties to bookings and reviews.
 
+Check the "database_index.sql" file, to go over the queries used for this simple analysis.
 
 ### Query Performance Analysis: Before Indexing
 
